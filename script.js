@@ -25,12 +25,44 @@ var models = [
     link: "https://www.dodge.com/",
   },
 ];
-var index = 4;
+var index = 0;
+var slideCount = models.length;
 
-document.querySelector(".card-title").textContent = models[index].name;
+showSlide(index);
 
+/* BEGIN: Left Button */
 document
-  .querySelector(".card-img-top")
-  .setAttribute("src", models[index].image);
+  .querySelector(".fa-circle-arrow-left")
+  .addEventListener("click", function () {
+    index--;
+    showSlide(index);
+    console.log(index);
+  });
+/* END: Left Button */
+/* BEGIN: Right Button */
+document
+  .querySelector(".fa-circle-arrow-right")
+  .addEventListener("click", function () {
+    index++;
+    showSlide(index);
+    console.log(index);
+  });
+/* END: Right Button */
 
-document.querySelector(".card-link").setAttribute("href", models[index].link);
+/* BEGIN:  showSlide*/
+function showSlide(i) {
+  index = i;
+  if (i < 0) {
+    index = slideCount - 1;
+  } else if (i >= slideCount) {
+    index = 0;
+  }
+  document.querySelector(".card-title").textContent = models[index].name;
+
+  document
+    .querySelector(".card-img-top")
+    .setAttribute("src", models[index].image);
+
+  document.querySelector(".card-link").setAttribute("href", models[index].link);
+}
+/* END:  showSlide*/
